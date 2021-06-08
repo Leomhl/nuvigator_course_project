@@ -5,8 +5,8 @@ class OrgsCardsList extends StatelessWidget {
   final double heightList;
 
   OrgsCardsList({
-    required this.cards,
-    required this.heightList
+    @required this.cards,
+    @required this.heightList
   }): assert(cards != null),
       assert(heightList != null);
 

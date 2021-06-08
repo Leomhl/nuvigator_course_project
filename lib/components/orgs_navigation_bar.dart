@@ -8,7 +8,7 @@ class OrgsNavigationBar extends StatelessWidget {
   final String screen;
 
   OrgsNavigationBar({
-    required this.screen,
+    @required this.screen,
   });
 
   @override

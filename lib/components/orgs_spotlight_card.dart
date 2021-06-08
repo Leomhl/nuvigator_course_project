@@ -9,11 +9,11 @@ class OrgsSpotlightCard extends StatelessWidget {
   final Color color;
 
   OrgsSpotlightCard({
-    required this.img,
-    required this.price,
-    required this.description,
-    required this.color,
-    required this.place
+    @required this.img,
+    @required this.price,
+    @required this.description,
+    @required this.color,
+    @required this.place
   }): assert(img != null),
       assert(price != null),
       assert(description != null),

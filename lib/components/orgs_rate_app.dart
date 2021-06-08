@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:proj/core/app_colors.dart';
-import 'package:proj/core/app_images.dart';
 
 class OrgsRateApp extends StatelessWidget {
   @override
@@ -11,7 +10,7 @@ class OrgsRateApp extends StatelessWidget {
         borderRadius: BorderRadius.circular(20)
       ),
       height: 100,
-      width: double.maxFinite,
+      width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(
@@ -31,14 +30,13 @@ class OrgsRateApp extends StatelessWidget {
                 SizedBox(height: 7),
                 Text(
                   'Sua opinião é muito importante',
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
+                    fontSize: 12,
                     color: Colors.white
                   ),
                 )
               ],
-            ),
-            Expanded(child:
-              Image.asset(AppImages.star)
             ),
           ],
         ),

@@ -16,7 +16,7 @@ class OrgsPackagesCard extends StatelessWidget {
     // required this.title,
     // required this.photo,
     // required this.description,
-    required this.price,
+    @required this.price,
   }): assert(price != null)//,
   // assert(title != null),
   // assert(photo != null),

@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:proj/components/orgs_menu_card.dart';
 import 'package:proj/components/orgs_rate_app.dart';
 import 'package:proj/core/app_colors.dart';
-import 'package:proj/screens/payment_screen.dart';
 import 'login_screen.dart';
+import 'package:nuvigator/nuvigator.dart';
 
 class MenuScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    final nuvigator = Nuvigator.of(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -29,30 +32,25 @@ class MenuScreen extends StatelessWidget {
               OrgsMenuCard(
                 text: 'Início',
                 icon: Icons.home,
-                action: () => DefaultTabController.of(context)!.index = 0,
+                action: () => nuvigator.open('home'),
               ),
               Divider(),
               OrgsMenuCard(
                 text: 'Favoritos',
                 icon: Icons.favorite,
-                action: () => DefaultTabController.of(context)!.index = 1,
+                action: () => nuvigator.open('favorites'),
               ),
               Divider(),
               OrgsMenuCard(
                 text: 'Perfil',
                 icon: Icons.person,
-                action: () => DefaultTabController.of(context)!.index = 2,
+                action: () => nuvigator.open('profile'),
               ),
               Divider(),
               OrgsMenuCard(
                 text: 'Métodos de pagamento',
                 icon: Icons.credit_card,
-                action: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PaymentScreen()),
-                  );
-                },
+                action: () => nuvigator.open('payment')
               ),
               Divider(),
               OrgsMenuCard(

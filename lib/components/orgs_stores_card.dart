@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:proj/core/app_colors.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
-class StoresCard extends StatelessWidget {
+class OrgsStoresCard extends StatelessWidget {
   final String img;
   final String title;
-  final String? distance;
-  final void Function()? action;
+  final String distance;
+  final void Function() action;
 
-  StoresCard({
-    required this.img,
-    required this.title,
+  OrgsStoresCard({
+    @required this.img,
+    @required this.title,
     this.distance,
-    required this.action
+    @required this.action
   }): assert(img != null),
       assert(title != null),
       assert(action != null);

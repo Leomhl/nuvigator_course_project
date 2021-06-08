@@ -1,25 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:proj/components/orgs_drawer.dart';
 import 'package:proj/components/orgs_profile_card.dart';
 import 'package:proj/core/app_colors.dart';
 import 'package:proj/core/app_images.dart';
 
 class ProfileScreen extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: OrgsDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(20, 50, 20, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Perfil',
-                style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.darkGrey
-                ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Perfil',
+                      style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.darkGrey
+                      ),
+                    ),
+                    IconButton(
+                      color: Colors.transparent,
+                      icon: Icon(Icons.menu, color: AppColors.green), // set your color here
+                      onPressed: () {
+                        _scaffoldKey.currentState.openDrawer();
+                      }
+                    ),
+                  ]
               ),
               SizedBox(height: 40),
               Column(

@@ -4,6 +4,7 @@ import 'package:proj/components/orgs_cards_list.dart';
 import 'package:proj/components/orgs_search_bar.dart';
 import 'package:proj/components/orgs_spotlight_card.dart';
 import 'package:proj/components/orgs_stores_card.dart';
+import 'package:proj/components/orgs_drawer.dart';
 import 'package:proj/core/app_colors.dart';
 import 'package:proj/core/app_images.dart';
 import 'package:proj/screens/producer_details_screen.dart';
@@ -11,17 +12,31 @@ import 'package:proj/screens/producer_details_screen.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.grey[100],
+      drawer: OrgsDrawer(),
       body: SingleChildScrollView(
         child: Padding(
-            padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
-                  AppImages.logo,
-                  height: kToolbarHeight,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset(
+                      AppImages.logo,
+                      height: kToolbarHeight,
+                    ),
+                    IconButton(
+                      color: Colors.transparent,
+                      icon: Icon(Icons.menu, color: AppColors.green), // set your color here
+                      onPressed: () => _scaffoldKey.currentState.openDrawer(),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 20,),
                 Text(
@@ -99,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10),
-                StoresCard(
+                OrgsStoresCard(
                   action: () {
                     Navigator.push(
                       context,
@@ -111,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                   title: 'Manjericão',
                 ),
                 SizedBox(height: 10),
-                StoresCard(
+                OrgsStoresCard(
                   action: () {
                     Navigator.push(
                       context,
@@ -123,7 +138,7 @@ class HomeScreen extends StatelessWidget {
                   title: 'Agrotoy',
                 ),
                 SizedBox(height: 10),
-                StoresCard(
+                OrgsStoresCard(
                   action: () {
                     Navigator.push(
                       context,
@@ -135,7 +150,7 @@ class HomeScreen extends StatelessWidget {
                   title: 'Jenny Jack',
                 ),
                 SizedBox(height: 10),
-                StoresCard(
+                OrgsStoresCard(
                   action: () {
                     Navigator.push(
                       context,
@@ -147,7 +162,7 @@ class HomeScreen extends StatelessWidget {
                   title: 'Grow',
                 ),
                 SizedBox(height: 10),
-                StoresCard(
+                OrgsStoresCard(
                   action: () {
                     Navigator.push(
                       context,
