@@ -3,13 +3,11 @@ import 'package:proj/components/orgs_menu_card.dart';
 import 'package:proj/components/orgs_rate_app.dart';
 import 'package:proj/core/app_colors.dart';
 import 'login_screen.dart';
-import 'package:nuvigator/nuvigator.dart';
 
 class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nuvigator = Nuvigator.of(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -32,25 +30,25 @@ class MenuScreen extends StatelessWidget {
               OrgsMenuCard(
                 text: 'Início',
                 icon: Icons.home,
-                action: () => nuvigator.open('home'),
+                action: () =>  Navigator.pushNamed(context, 'home'),
               ),
               Divider(),
               OrgsMenuCard(
                 text: 'Favoritos',
                 icon: Icons.favorite,
-                action: () => nuvigator.open('favorites'),
+                action: () => Navigator.pushNamed(context, 'favorites'),
               ),
               Divider(),
               OrgsMenuCard(
                 text: 'Perfil',
                 icon: Icons.person,
-                action: () => nuvigator.open('profile'),
+                action: () => Navigator.pushNamed(context, 'profile'),
               ),
               Divider(),
               OrgsMenuCard(
                 text: 'Métodos de pagamento',
                 icon: Icons.credit_card,
-                action: () => nuvigator.open('payment')
+                action: () => Navigator.pushNamed(context, 'payment')
               ),
               Divider(),
               OrgsMenuCard(

@@ -15,7 +15,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  nuvigator: ^1.1.0
   smooth_star_rating:
     git:
       url: https://github.com/bhavin-concetto/smoothratingbar.git

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nuvigator/next.dart';
 import 'package:proj/screens/favorites_screen.dart';
 import 'package:proj/screens/home_screen.dart';
 import 'package:proj/screens/menu_screen.dart';
@@ -19,17 +18,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Montserrat',
       ),
-      home: Nuvigator.routes(
-        initialRoute: 'home',
-        screenType: materialScreenType,
-        routes: [
-          NuRouteBuilder(path: 'home', builder: (_, __, ___) => HomeScreen()),
-          NuRouteBuilder(path: 'favorites', builder: (_, __, ___) => FavoritesScreen()),
-          NuRouteBuilder(path: 'profile', builder: (_, __, ___) => ProfileScreen()),
-          NuRouteBuilder(path: 'payment', builder: (_, __, ___) => PaymentScreen()),
-          NuRouteBuilder(path: 'menu', builder: (_, __, ___) => MenuScreen()),
-        ],
-      ),
+      initialRoute: 'home',
+      routes: {
+        'home': (context) => HomeScreen(),
+        'favorites': (context) => FavoritesScreen(),
+        'profile': (context) => ProfileScreen(),
+        'payment': (context) => PaymentScreen(),
+        'menu': (context) => MenuScreen(),
+      },
     );
   }
 }
