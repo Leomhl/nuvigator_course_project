@@ -67,7 +67,6 @@ class OrgsStoresCard extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 _favoriteOrDistance(distance),
               ],
             ),
@@ -84,10 +83,10 @@ class OrgsStoresCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-                'Distância',
-                style: TextStyle(
-                    color: AppColors.darkGrey
-                )
+              'Distância',
+              style: TextStyle(
+                  color: AppColors.darkGrey
+              )
             ),
             Text('$distance km')
           ],
@@ -100,8 +99,8 @@ class OrgsStoresCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-              Icons.favorite,
-              color: AppColors.green,
+            Icons.favorite,
+            color: AppColors.green,
             size: 30,
           ),
         ],

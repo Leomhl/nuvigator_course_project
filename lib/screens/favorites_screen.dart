@@ -70,12 +70,10 @@ class FavoritesScreen extends StatelessWidget {
                     title: 'Grow',
                   ),
                   OrgsStoresCard(
-                    action: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                      );
-                    },
+                    action: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
+                    ),
                     img: AppImages.store5,
                     title: 'Potager',
                   ),

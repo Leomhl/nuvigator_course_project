@@ -74,12 +74,12 @@ class OrgsSpotlightCard extends StatelessWidget {
                 ],
               ),
               ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  child: Container(
-                    color: AppColors.white,
-                    child: Image.asset(img),
-                    width: 120,
-                  ),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                child: Container(
+                  color: AppColors.white,
+                  child: Image.asset(img),
+                  width: 120,
+                ),
               ),
             ],
           ),
