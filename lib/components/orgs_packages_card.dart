@@ -6,7 +6,7 @@ class OrgsPackagesCard extends StatelessWidget {
 
   // TODO remover a atribuição dos valores e descomentar o construtor
   final String title = 'Cenouras';
-  final String photo = AppImages.carrots;
+  final String photo = AppImages.vegetables_package;
   final String description = 'Lorem ipsum dolor sit amet, consectetur'
   'adipiscing elit. Maecenas tincidunt cursus lectus. Mauris lacinia '
   'pharetra arcu, a fermentum justo vestibulum at. Nam venenatis leo ';
