@@ -10,7 +10,7 @@
 				{"title": "Sortida", "description": "Cesta de legumes sortida e bem fresquinha, 8 variedades de legumes diferentes!", "price": "35,00"},
 				{"title": "Batatas", "description": "Cesta de batatas: doce, inglesa e baroa!", "price": "15,00"},
 				{"title": "Frutas", "description": "Cesta royal de frutas, 6 tipos de frutas diferentes.", "price": "27,90"},
-				{"title": "Temperos", "description": "Cesta de temperos nobres. 18 variedades de temperos!", "price": "45,00"},
+				{"title": "Temperos", "description": "Cesta de temperos nobres. 18 variedades de temperos!", "price": "45,00"}
 			]
 		},
 		"agrotoy": {
@@ -20,7 +20,7 @@
 			"distance": "2 km",
 			"packages": [
 				{"title": "Cenouras", "description": "Cesta de mini cenouras orgânicas frescas direto do produtor. A criançada ama!", "price": "22,00"},
-				{"title": "Frutas", "description": "Frutas coloridas sem manchas. Banana, maçã e ova verde.", "price": "14,90"},
+				{"title": "Frutas", "description": "Frutas coloridas sem manchas. Banana, maçã e ova verde.", "price": "14,90"}
 			]
 		},
 		"jennyjack": {
@@ -31,7 +31,7 @@
 			"packages": [
 				{"title": "Cenouras", "description": "Cesta de mini cenouras orgânicas frescas.", "price": "20,00"},
 				{"title": "Sortida", "description": "Cesta de legumes sortida e bem fresquinha, 6 variedades de legumes diferentes!", "price": "28,00"},
-				{"title": "Temperos", "description": "Cesta de temperos com 10 variedades!", "price": "30,00"},
+				{"title": "Temperos", "description": "Cesta de temperos com 10 variedades!", "price": "30,00"}
 			]
 		},
 		"grow": {
@@ -43,7 +43,7 @@
 				{"title": "Cenouras", "description": "Cesta de mini cenouras orgânicas frescas. 50kg", "price": "200,00"},
 				{"title": "Sortida", "description": "Cesta de legumes sortida e bem fresquinha, 20 variedades de legumes diferentes!", "price": "400,00"},
 				{"title": "Temperos", "description": "Cesta de temperos com 100 variedades!", "price": "950,00"},
-				{"title": "Frutas", "description": "Saca de frutas, 6 tipos de frutas diferentes. 20kg", "price": "270,00"},
+				{"title": "Frutas", "description": "Saca de frutas, 6 tipos de frutas diferentes. 20kg", "price": "270,00"}
 			]
 		},
 		"postager": {
@@ -55,14 +55,13 @@
 				{"title": "Abóboras", "description": "Abóboras padrão selecionadas sem manchas. Unidade", "price": "15,00"},
 				{"title": "Tomates", "description": "Cesta de tomates cereja, 5kg", "price": "40,00"},
 				{"title": "Temperos", "description": "Cesta de temperos com 100 variedades!", "price": "950,00"},
-				{"title": "Frutas", "description": "Saca de frutas, 6 tipos de frutas diferentes. 20kg", "price": "270,00"},
+				{"title": "Frutas", "description": "Saca de frutas, 6 tipos de frutas diferentes. 20kg", "price": "270,00"}
 			]
-		},
-
+		}
 	},
 	"favorites": ["manjericao", "agrotoy", "jennyjack", "grow", "postager"],
 	"highlights": [
-		{"name": "Pack de frutas", price: "29,90", store: "Grow", "image": "assets/images/fruits.png"},
-		{"name": "Pack de legumes", price: "27,90", store: "Manjericão", "image": "assets/images/vegetables.png"},
+		{"name": "Pack de frutas", "price": "29,90", "store": "Grow", "image": "assets/images/fruits.png"},
+		{"name": "Pack de legumes", "price": "27,90", "store": "Manjericão", "image": "assets/images/vegetables.png"}
 	]
 }

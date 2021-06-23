@@ -7,9 +7,16 @@ import 'package:proj/components/orgs_stores_card.dart';
 import 'package:proj/components/orgs_drawer.dart';
 import 'package:proj/core/app_colors.dart';
 import 'package:proj/core/app_images.dart';
+import 'package:proj/models/producer_model.dart';
+import 'package:proj/repository/data.dart';
 import 'package:proj/screens/producer_details_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -59,22 +66,25 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: 10),
                 OrgsSearchBar(),
                 SizedBox(height: 10),
-                OrgsCardsList(heightList: 160, cards: [
-                  OrgsHighlightsCard(
-                    img: AppImages.fruits,
-                    title: 'Frutas frescas',
-                    description: 'Cestas de frutas frescas',
-                    color: AppColors.white,
-                    btnAction: (){},
-                  ),
-                  OrgsHighlightsCard(
-                    img: AppImages.vegetables,
-                    title: 'Legumes frescos',
-                    description: 'Todo dia temos legumes frescos',
-                    color: AppColors.white,
-                    btnAction: (){},
-                  ),
-                ]),
+                OrgsCardsList(
+                  heightList: 160,
+                  cards: [
+                    OrgsHighlightsCard(
+                      img: AppImages.fruits,
+                      title: 'Frutas frescas',
+                      description: 'Cestas de frutas frescas',
+                      color: AppColors.white,
+                      btnAction: (){},
+                    ),
+                    OrgsHighlightsCard(
+                      img: AppImages.vegetables,
+                      title: 'Legumes frescos',
+                      description: 'Todo dia temos legumes frescos',
+                      color: AppColors.white,
+                      btnAction: (){},
+                    ),
+                  ]
+                ),
                 SizedBox(height: 10),
                 Text(
                   'Cestas em destaque',
@@ -102,72 +112,59 @@ class HomeScreen extends StatelessWidget {
                       place: 'Legume org',
                       price: '27,90',
                     ),
-                  ]
+                ]
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Mais acessados',
+                style: TextStyle(
+                  color: AppColors.darkGrey,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
                 ),
-                SizedBox(height: 20),
-                Text(
-                  'Mais acessados',
-                  style: TextStyle(
-                    color: AppColors.darkGrey,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
-                  ),
-                ),
-                SizedBox(height: 10),
-                OrgsStoresCard(
-                  action: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                  ),
-                  img: AppImages.store1,
-                  distance: '10',
-                  title: 'Manjericão',
-                ),
-                SizedBox(height: 10),
-                OrgsStoresCard(
-                  action: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                  ),
-                  img: AppImages.store2,
-                  distance: '2',
-                  title: 'Agrotoy',
-                ),
-                SizedBox(height: 10),
-                OrgsStoresCard(
-                  action: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                  ),
-                  img: AppImages.store3,
-                  distance: '12',
-                  title: 'Jenny Jack',
-                ),
-                SizedBox(height: 10),
-                OrgsStoresCard(
-                  action: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                    ),
-                  img: AppImages.store4,
-                  distance: '10',
-                  title: 'Grow',
-                ),
-                SizedBox(height: 10),
-                OrgsStoresCard(
-                  action: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                  ),
-                  img: AppImages.store5,
-                  distance: '5',
-                  title: 'Potager',
-                ),
-                SizedBox(height: 20),
-              ],
-            ),
+              ),
+              SizedBox(height: 10),
+              FutureBuilder(
+                future: _generateProducerList(context),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                     return Column(children: snapshot.data);
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ) ,
+              SizedBox(height: 20),
+            ],
           ),
+        ),
       ),
     );
+  }
+
+  Future _generateProducerList(BuildContext context) async {
+    List<Widget> children = [];
+    final data = await Data.getJson();
+    final producers = data["producers"];
+
+    for(final producer in producers.keys) {
+      // children.add(OrgsStoresCard(
+      //   action: () => Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
+      //   ),
+      //   img: producers[producer]["logo"],
+      //   distance: producers[producer]["distance"],
+      //   title: producers[producer]["name"],
+      // ));
+      // children.add(SizedBox(height: 10));
+      // print(producers[producer]);
+      final prod = Producer.fromJson(producers[producer]);
+      print(prod);
+    }
+
+    return children;
   }
 }

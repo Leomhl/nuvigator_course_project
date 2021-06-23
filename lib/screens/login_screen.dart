@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proj/core/app_colors.dart';
 import 'package:proj/core/app_images.dart';
 import 'package:proj/main.dart';
+import 'package:proj/repository/data.dart';
 import 'package:proj/screens/singup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -79,12 +80,17 @@ class LoginScreen extends StatelessWidget {
                 vertical: 10,
               ),
               child: GestureDetector(
-                onTap: () {
-                   Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => SingupScreen()),
-                    (route) => false
-                  );
+                onTap: () async {
+
+                  final data = await Data.getJson();
+                  print(data);
+
+
+                  //  Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => SingupScreen()),
+                  //   (route) => false
+                  // );
                 },
                 child: Container(
                   width: double.maxFinite,
@@ -116,13 +122,13 @@ class LoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8),
                   child:  Center(
                       child: Text(
-                        'Esqueci minha senha',
-                        style: TextStyle(
-                            color: AppColors.green,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14
-                        ),
-                      )
+                      'Esqueci minha senha',
+                      style: TextStyle(
+                          color: AppColors.green,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14
+                      ),
+                    )
                   ),
                 ),
               ),
