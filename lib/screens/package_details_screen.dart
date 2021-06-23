@@ -133,14 +133,14 @@ class PackageDetailsScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
-                child: ListView(
-                  children: [
-                    OrgsPackagesCard(price: '15,00'),
-                  ],
-                ),
-              )
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+              child: ListView(
+                children: [
+                  OrgsPackagesCard(price: '15,00'),
+                ],
+              ),
+            )
           ),
         ],
       ),

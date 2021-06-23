@@ -3,7 +3,6 @@ import 'package:proj/components/orgs_drawer.dart';
 import 'package:proj/components/orgs_stores_card.dart';
 import 'package:proj/core/app_colors.dart';
 import 'package:proj/core/app_images.dart';
-import 'package:proj/screens/producer_details_screen.dart';
 
 class FavoritesScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -50,30 +49,17 @@ class FavoritesScreen extends StatelessWidget {
               child: ListView(
                 children: [
                   OrgsStoresCard(
-                    action: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                      );
-                    },
+                    action: () => Navigator.pushNamed(context, 'producer-details'),
                     img: AppImages.store1,
                     title: 'Manjericão',
                   ),
                   OrgsStoresCard(
-                    action: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                      );
-                    },
+                    action: () => Navigator.pushNamed(context, 'producer-details'),
                     img: AppImages.store4,
                     title: 'Grow',
                   ),
                   OrgsStoresCard(
-                    action: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                    ),
+                    action: () => Navigator.pushNamed(context, 'producer-details'),
                     img: AppImages.store5,
                     title: 'Potager',
                   ),

@@ -7,7 +7,6 @@ import 'package:proj/components/orgs_stores_card.dart';
 import 'package:proj/components/orgs_drawer.dart';
 import 'package:proj/core/app_colors.dart';
 import 'package:proj/core/app_images.dart';
-import 'package:proj/screens/producer_details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -115,50 +114,35 @@ class HomeScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 OrgsStoresCard(
-                  action: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                  ),
+                  action: () => Navigator.pushNamed(context, 'producer-details'),
                   img: AppImages.store1,
                   distance: '10',
                   title: 'Manjericão',
                 ),
                 SizedBox(height: 10),
                 OrgsStoresCard(
-                  action: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                  ),
+                  action: () => Navigator.pushNamed(context, 'producer-details'),
                   img: AppImages.store2,
                   distance: '2',
                   title: 'Agrotoy',
                 ),
                 SizedBox(height: 10),
                 OrgsStoresCard(
-                  action: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                  ),
+                  action: () => Navigator.pushNamed(context, 'producer-details'),
                   img: AppImages.store3,
                   distance: '12',
                   title: 'Jenny Jack',
                 ),
                 SizedBox(height: 10),
                 OrgsStoresCard(
-                  action: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                    ),
+                  action: () => Navigator.pushNamed(context, 'producer-details'),
                   img: AppImages.store4,
                   distance: '10',
                   title: 'Grow',
                 ),
                 SizedBox(height: 10),
                 OrgsStoresCard(
-                  action: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-                  ),
+                  action: () => Navigator.pushNamed(context, 'producer-details'),
                   img: AppImages.store5,
                   distance: '5',
                   title: 'Potager',

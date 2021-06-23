@@ -35,10 +35,7 @@ class ProducerDetailsScreen extends StatelessWidget {
         ),
       ),
       body: InkWell(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => PackageDetailsScreen()),
-        ),
+        onTap: () => Navigator.pushNamed(context, 'package-details'),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
