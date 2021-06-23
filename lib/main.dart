@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         'favorites': (context) => FavoritesScreen(),
         'profile': (context) => ProfileScreen(),
         'payment': (context) => PaymentScreen(),
-        'producer-datails': (context) => ProducerDetailsScreen(),
+        'producer-details': (context) => ProducerDetailsScreen(),
         'package-details': (context) => PackageDetailsScreen(),
       },
     );

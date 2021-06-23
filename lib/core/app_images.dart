@@ -8,6 +8,7 @@ class AppImages {
 
   static String get bg_producer => "assets/images/bg_producer.png";
   static String get carrots => "assets/images/carrots.png";
+  static String get vegetables_package => "assets/images/cesta_orgnicos.jpg";
   static String get fruits => "assets/images/fruits.png";
   static String get package_details => "assets/images/package_details.png";
   static String get vegetables => "assets/images/vegetables.png";
