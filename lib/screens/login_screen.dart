@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proj/core/app_colors.dart';
 import 'package:proj/core/app_images.dart';
-import 'package:proj/main.dart';
-import 'package:proj/repository/data.dart';
+import 'package:proj/screens/home_screen.dart';
 import 'package:proj/screens/singup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -63,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () =>Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MyApp()),
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
                   ),
                   style: ElevatedButton.styleFrom(
                     primary: AppColors.green, // background
@@ -81,16 +80,11 @@ class LoginScreen extends StatelessWidget {
               ),
               child: GestureDetector(
                 onTap: () async {
-
-                  final data = await Data.getJson();
-                  print(data);
-
-
-                  //  Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => SingupScreen()),
-                  //   (route) => false
-                  // );
+                   Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => SingupScreen()),
+                    (route) => false
+                  );
                 },
                 child: Container(
                   width: double.maxFinite,

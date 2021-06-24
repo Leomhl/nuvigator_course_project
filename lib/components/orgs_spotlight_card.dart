@@ -5,7 +5,7 @@ class OrgsSpotlightCard extends StatelessWidget {
   final String img;
   final String price;
   final String description;
-  final String place;
+  final String store;
   final Color color;
 
   OrgsSpotlightCard({
@@ -13,12 +13,12 @@ class OrgsSpotlightCard extends StatelessWidget {
     @required this.price,
     @required this.description,
     @required this.color,
-    @required this.place
+    @required this.store
   }): assert(img != null),
       assert(price != null),
       assert(description != null),
       assert(color != null),
-      assert(place != null);
+      assert(store != null);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class OrgsSpotlightCard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                         child: Text(
-                          place,
+                          store,
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w400,

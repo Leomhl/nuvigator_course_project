@@ -27,92 +27,78 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: OrgsDrawer(),
       body: SingleChildScrollView(
         child: Padding(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(
-                      AppImages.logo,
-                      height: kToolbarHeight,
-                    ),
-                    IconButton(
-                      color: Colors.transparent,
-                      icon: Icon(Icons.menu, color: AppColors.green), // set your color here
-                      onPressed: () => _scaffoldKey.currentState.openDrawer(),
-                    ),
-                  ],
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    AppImages.logo,
+                    height: kToolbarHeight,
+                  ),
+                  IconButton(
+                    color: Colors.transparent,
+                    icon: Icon(Icons.menu, color: AppColors.green), // set your color here
+                    onPressed: () => _scaffoldKey.currentState.openDrawer(),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20,),
+              Text(
+                'Olá, Leonardo',
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.darkGrey
                 ),
-                SizedBox(height: 20,),
-                Text(
-                  'Olá, Leonardo',
-                  style: TextStyle(
-                    fontSize: 26,
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Encontre os melhores produtores',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(height: 10),
+              OrgsSearchBar(),
+              SizedBox(height: 10),
+              FutureBuilder(
+                future: _generateHighlightsCards(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return snapshot.data;
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Cestas em destaque',
+                style: TextStyle(
+                    fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: AppColors.darkGrey
-                  ),
                 ),
-                SizedBox(height: 10),
-                Text(
-                  'Encontre os melhores produtores',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(height: 10),
-                OrgsSearchBar(),
-                SizedBox(height: 10),
-                OrgsCardsList(
-                  heightList: 160,
-                  cards: [
-                    OrgsHighlightsCard(
-                      img: AppImages.fruits,
-                      title: 'Frutas frescas',
-                      description: 'Cestas de frutas frescas',
-                      color: AppColors.white,
-                      btnAction: (){},
-                    ),
-                    OrgsHighlightsCard(
-                      img: AppImages.vegetables,
-                      title: 'Legumes frescos',
-                      description: 'Todo dia temos legumes frescos',
-                      color: AppColors.white,
-                      btnAction: (){},
-                    ),
-                  ]
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Cestas em destaque',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.darkGrey
-                  ),
-                ),
-                SizedBox(height: 10),
-                OrgsCardsList(
-                  heightList: 140,
-                  cards: [
-                    OrgsSpotlightCard(
-                      img: AppImages.fruits,
-                      color: AppColors.frostMint,
-                      description: 'Pack de frutas',
-                      place: 'Grow',
-                      price: '25,90',
-                    ),
-                    OrgsSpotlightCard(
-                      img: AppImages.vegetables,
-                      color: AppColors.frostMint,
-                      description: 'Pack de legumes',
-                      place: 'Legume org',
-                      price: '27,90',
-                    ),
-                ]
+              ),
+              SizedBox(height: 10),
+              FutureBuilder(
+                future: _generateSpotlightCards(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return snapshot.data;
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
               ),
               SizedBox(height: 20),
               Text(
@@ -135,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }
                 },
-              ) ,
+              ),
               SizedBox(height: 20),
             ],
           ),
@@ -150,21 +136,66 @@ class _HomeScreenState extends State<HomeScreen> {
     final producers = data["producers"];
 
     for(final producer in producers.keys) {
-      // children.add(OrgsStoresCard(
-      //   action: () => Navigator.push(
-      //     context,
-      //     MaterialPageRoute(builder: (context) => ProducerDetailsScreen()),
-      //   ),
-      //   img: producers[producer]["logo"],
-      //   distance: producers[producer]["distance"],
-      //   title: producers[producer]["name"],
-      // ));
-      // children.add(SizedBox(height: 10));
-      // print(producers[producer]);
+
       final prod = Producer.fromJson(producers[producer]);
-      print(prod);
+
+      children.add(OrgsStoresCard(
+        action: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProducerDetailsScreen(producer: prod)),
+        ),
+        img: prod.logo,
+        distance: prod.distance,
+        title: prod.name,
+      ));
+
+      children.add(SizedBox(height: 10));
     }
 
     return children;
+  }
+
+  Future<OrgsCardsList> _generateHighlightsCards() async {
+    List<Widget> children = [];
+    final data = await Data.getJson();
+    final highlights = data["highlights"];
+
+    for(final highlight in highlights) {
+
+      children.add(OrgsHighlightsCard(
+        img: highlight["image"],
+        title: highlight["name"],
+        description: highlight["description"],
+        color: AppColors.white,
+        btnAction: (){},
+      ));
+    }
+
+    return OrgsCardsList(
+      heightList: 160,
+      cards: children
+    );
+  }
+
+  Future<OrgsCardsList> _generateSpotlightCards() async {
+    List<Widget> children = [];
+    final data = await Data.getJson();
+    final spotlights = data["spotlights"];
+
+    for(final spotlight in spotlights) {
+
+      children.add(OrgsSpotlightCard(
+        img: spotlight["image"],
+        price: spotlight["price"],
+        description: spotlight["description"],
+        color: AppColors.frostMint,
+        store: spotlight["store"]
+      ));
+    }
+
+    return OrgsCardsList(
+        heightList: 140,
+        cards: children
+    );
   }
 }
