@@ -2,22 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:proj/components/orgs_packages_card.dart';
 import 'package:proj/core/app_colors.dart';
 import 'package:proj/core/app_images.dart';
-import 'package:proj/screens/package_details_screen.dart';
+import 'package:proj/models/package_model.dart';
+import 'package:proj/models/producer_model.dart';
 
 class ProducerDetailsScreen extends StatelessWidget {
 
-  // TODO Remover os valores estáticos e descomentar o
-  // construtor quando for utilizar com dados reais
-  final String title = 'Manjericão';
-  final String description = 'Produtos orgânicos frescos colhidos todas as manhãs '
-  'das nossas hortas. Trabalhamos apenas com produtos sem agrotóxicos!';
-  final String logo = AppImages.store1;
-
-  // ProducerDetailsScreen({
-  //   @required this.description,
-  //   @required this.title,
-  //   @required this.logo
-  // });
+  final Producer producer;
+  ProducerDetailsScreen({
+    @required this.producer
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,89 +27,99 @@ class ProducerDetailsScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: InkWell(
-        onTap: () => Navigator.pushNamed(context, 'package-details'),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                Image.asset(
-                  AppImages.bg_producer,
-                  fit: BoxFit.fitWidth,
-                  width: double.infinity,
-                  height: 180,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 150, 20, 15),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        child: Image.asset(logo),
-                      ),
-                      SizedBox(width: 10,),
-                      Expanded(
-                          child: Text(
-                            title,
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          )
-                      ),
-                      Text(
-                        '10 km',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Text(
-                description,
-                style: TextStyle(
-                  color: AppColors.darkGrey,
-                  fontSize: 18
-                )
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              Image.asset(
+                AppImages.bg_producer,
+                fit: BoxFit.fitWidth,
+                width: double.infinity,
+                height: 180,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: Text(
-                'Cestas',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
-                child: ListView(
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 150, 20, 15),
+                child: Row(
                   children: [
-                    OrgsPackagesCard(price: '12,00'),
-                    OrgsPackagesCard(price: '13,00'),
-                    OrgsPackagesCard(price: '14,00'),
-                    OrgsPackagesCard(price: '15,00'),
-                    OrgsPackagesCard(price: '16,00'),
-                    OrgsPackagesCard(price: '17,00'),
-                    OrgsPackagesCard(price: '18,00'),
-                    OrgsPackagesCard(price: '19,00'),
+                    ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      child: Image.asset(producer.logo),
+                    ),
+                    SizedBox(width: 10,),
+                    Expanded(
+                        child: Text(
+                          producer.name,
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        )
+                    ),
+                    Text(
+                      '${producer.distance} km',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ],
                 ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Text(
+              producer.description,
+              style: TextStyle(
+                color: AppColors.darkGrey,
+                fontSize: 18
               )
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+            child: Text(
+              'Cestas',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 25,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+              child: ListView(
+                children: _generatePackageList(context, producer.packages)
+              ),
+            )
+          ),
+        ],
       ),
     );
+  }
+
+  List _generatePackageList(BuildContext context, List packages) {
+    List<Widget> children = [];
+    for(final package in packages) {
+      final pack = Package.fromJson(package);
+
+      children.add(InkWell(
+        onTap: () => Navigator.pushNamed(
+            context,
+            'package-details',
+            arguments: {"package": pack, "producer": producer}
+        ),
+        child: OrgsPackagesCard(
+          title: pack.title,
+          price: pack.price,
+          description: pack.description,
+        ),
+      ));
+    }
+
+    return children;
   }
 }

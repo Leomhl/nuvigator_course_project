@@ -2,25 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:proj/components/orgs_packages_card.dart';
 import 'package:proj/core/app_colors.dart';
 import 'package:proj/core/app_images.dart';
+import 'package:proj/models/package_model.dart';
+import 'package:proj/models/producer_model.dart';
 
 class PackageDetailsScreen extends StatelessWidget {
 
-  // TODO Remover os valores estáticos e descomentar o
-  // construtor quando for utilizar com dados reais
-  final String packageName = 'Cenouras';
-  final String producer = 'Manjericão';
-  final String description = 'Produtos orgânicos frescos colhidos todas as manhãs '
-  'das nossas hortas. Trabalhamos apenas com produtos sem agrotóxicos!';
-  final String logo = AppImages.store1;
-  final String price = '12,00';
+  final Package package;
+  final Producer producer;
 
-  // ProducerDetailsScreen({
-  //   @required this.packageName,
-  //   @required this.producer,
-  //   @required this.description
-  //   @required this.logo,
-  //   @required this.price,
-  // });
+  PackageDetailsScreen({
+    @required this.package,
+    @required this.producer,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +45,7 @@ class PackageDetailsScreen extends StatelessWidget {
               children: [
                 Expanded(
                     child: Text(
-                      packageName,
+                      package.title,
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w700,
@@ -60,7 +53,7 @@ class PackageDetailsScreen extends StatelessWidget {
                     )
                 ),
                 Text(
-                  '10 km',
+                  '${producer.distance} km',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
@@ -75,11 +68,11 @@ class PackageDetailsScreen extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
-                  child: Image.asset(logo, width: 50,),
+                  child: Image.asset(producer.logo, width: 50,),
                 ),
                 SizedBox(width: 10,),
                 Text(
-                  producer,
+                  producer.name,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 18
@@ -91,7 +84,7 @@ class PackageDetailsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
             child: Text(
-              description,
+              producer.description,
               style: TextStyle(
               ),
             ),
@@ -99,7 +92,7 @@ class PackageDetailsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
             child: Text(
-              'R\$ $price',
+              'R\$ ${package.price}',
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w700,
@@ -133,17 +126,30 @@ class PackageDetailsScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
-              child: ListView(
-                children: [
-                  OrgsPackagesCard(price: '15,00'),
-                ],
-              ),
-            )
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+                child: ListView(
+                  children: _generatePackageItems(package)
+                ),
+              )
           ),
         ],
       ),
     );
+  }
+
+  List<Widget> _generatePackageItems(Package package) {
+    List<Widget> children = [];
+
+    for(final item in package.items) {
+      children.add(
+        OrgsPackagesCard(
+          description: "",
+          title: item,
+          price: null
+      ));
+    }
+
+    return children;
   }
 }
