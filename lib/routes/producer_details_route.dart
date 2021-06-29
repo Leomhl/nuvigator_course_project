@@ -11,6 +11,7 @@ class ProducerDetailsRoute extends NuRoute {
 
   @override
   Widget build(BuildContext context, NuRouteSettings settings) {
+
     return ProducerDetailsScreen(
       onPackageDetailsClick: (parameters) => nuvigator.open('package-details', parameters: parameters),
       producer: settings.rawParameters['producer'],

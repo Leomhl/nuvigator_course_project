@@ -11,6 +11,7 @@ class FavoriteRoute extends NuRoute {
 
   @override
   Widget build(BuildContext context, NuRouteSettings settings) {
+
     return FavoritesScreen(
       onProducerDetailsClick: (parameters) => nuvigator.open('producer-details', parameters: parameters),
     );
