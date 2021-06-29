@@ -39,7 +39,7 @@ class MenuScreen extends StatelessWidget {
               OrgsMenuCard(
                 text: 'Favoritos',
                 icon: Icons.favorite,
-                action: () => nuvigator.open('favorites'),
+                action: () => nuvigator.open('favorite'),
               ),
               Divider(),
               OrgsMenuCard(
