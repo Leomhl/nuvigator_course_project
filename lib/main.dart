@@ -1,23 +1,71 @@
-import 'package:flutter/material.dart';
+import 'package:nested_nuvigators/flows/first_flow/route.dart';
+import 'package:nested_nuvigators/flows/second_flow/route.dart';
 import 'package:nuvigator/next.dart';
-import 'package:proj/router.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Navegadores aninhados',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Montserrat',
+        primarySwatch: Colors.purple,
       ),
-      home: Nuvigator(
-        router: MyRouter(),
+      home: Nuvigator.routes(
+        initialRoute: 'home',
+        screenType: materialScreenType,
+        routes: [
+          HomeRoute(),
+          FirstFlowRoute(),
+          SecondFlowRoute(),
+        ],
       ),
+    );
+  }
+}
+
+class HomeRoute extends NuRoute {
+  @override
+  String get path => 'home';
+
+  @override
+  ScreenType get screenType => materialScreenType;
+
+  @override
+  Widget build(BuildContext context, NuRouteSettings<Object> settings) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Nuvigator rotas aninhadas"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Toque no botão para mudar de página',
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              child: Text('Primeiro fluxo'),
+              onPressed: () => nuvigator.open('first-flow'),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              child: Text('Segundo fluxo'),
+              onPressed: () => nuvigator.open('second-flow'),
+            ),
+          ],
+        ),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
