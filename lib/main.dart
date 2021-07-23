@@ -1,7 +1,10 @@
-import 'package:nested_nuvigators/flows/first_flow/route.dart';
-import 'package:nested_nuvigators/flows/second_flow/route.dart';
-import 'package:nuvigator/next.dart';
+import 'package:nested_nuvigators/screens/display_screen.dart';
+import 'package:nested_nuvigators/screens/input_screen.dart';
+import 'package:nested_nuvigators/screens/one_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:nested_nuvigators/screens/three_screen.dart';
+import 'package:nested_nuvigators/screens/two_screen.dart';
+import 'package:nuvigator/next.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Navegadores aninhados',
+      title: 'Flutter App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
@@ -20,52 +23,52 @@ class MyApp extends StatelessWidget {
         initialRoute: 'home',
         screenType: materialScreenType,
         routes: [
-          HomeRoute(),
-          FirstFlowRoute(),
-          SecondFlowRoute(),
+          NuRouteBuilder(path: 'home', builder: (_, __, ___) => HomeScreen()),
+          NuRouteBuilder(path: 'one', builder: (_, __, ___) => OneScreen()),
+          NuRouteBuilder(path: 'two', builder: (_, __, ___) => TwoScreen()),
+          NuRouteBuilder(path: 'three', builder: (_, __, ___) => ThreeScreen()),
+          NuRouteBuilder(path: 'input', builder: (_, __, ___) => InputScreen()),
+          NuRouteBuilder(path: 'display', builder: (_, __, ___) => DisplayScreen()),
         ],
       ),
     );
   }
 }
 
-class HomeRoute extends NuRoute {
-  @override
-  String get path => 'home';
+class HomeScreen extends StatelessWidget {
 
   @override
-  ScreenType get screenType => materialScreenType;
+  Widget build(BuildContext context) {
+    final nuvigator = Nuvigator.of(context);
 
-  @override
-  Widget build(BuildContext context, NuRouteSettings<Object> settings) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Nuvigator rotas aninhadas"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Toque no botão para mudar de página',
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-              child: Text('Primeiro fluxo'),
-              onPressed: () => nuvigator.open('first-flow'),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-              child: Text('Segundo fluxo'),
-              onPressed: () => nuvigator.open('second-flow'),
-            ),
-          ],
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+       appBar: AppBar(
+         title: Text("Flutter app"),
+       ),
+       body: Center(
+         child: Column(
+           mainAxisAlignment: MainAxisAlignment.center,
+           children: <Widget>[
+             Text(
+               'Toque no botão para mudar de página',
+             ),
+             SizedBox(
+               height: 20,
+             ),
+             ElevatedButton(
+               child: Text('Primeiro fluxo'),
+               onPressed: () => nuvigator.open('one'),
+             ),
+             SizedBox(
+               height: 20,
+             ),
+             ElevatedButton(
+               child: Text('Segundo fluxo'),
+               onPressed: () => nuvigator.open('input')
+             ),
+           ],
+         ),
+       ), //
     );
   }
 }
